@@ -8,6 +8,9 @@ public class Calcolo {
 	static ArrayList<Integer> Nodi = new ArrayList<Integer>();
 	static ArrayList<Integer> Collegamenti = new ArrayList<Integer>();
 	static ArrayList<Integer> Quantita = new ArrayList<Integer>();
+	static ArrayList<Integer> grafoSP = new ArrayList<Integer>();
+	static ArrayList<Integer> LinkSP = new ArrayList<Integer>();
+	static ArrayList<Integer> quantitaSP = new ArrayList<Integer>();
 	static int contaLink=0;
 	static int dimensioneGrafo=0;
 	static int puntatore=0;
@@ -79,24 +82,39 @@ public class Calcolo {
 	public static void Iterazioni() {
 		for(int i=0; i<Problemi.size();i++) {
 			int posizionePartenza=dimensioneGrafo;
+			grafoSP.clear();
+			LinkSP.clear();
+			quantitaSP.clear();
 			dimensioneGrafo=dimensioneGrafo + DimensioniGrafi.get(i);
 			System.out.println("il problema numero " + i + " ha i seguenti nodi:");
 			for(int j=posizionePartenza;j<dimensioneGrafo;j++) {
-				int nodo=Nodi.get(j);
 				int puntatorePartenza = posizioneIniziale;
 				posizioneIniziale= posizioneIniziale + Quantita.get(j);
-				System.out.println(nodo + " che ha " +Quantita.get(j) + " Link, che sono " );
+				grafoSP.add(Nodi.get(j));
+				quantitaSP.add(Quantita.get(j));
+				System.out.println(Nodi.get(j) + " che ha " +Quantita.get(j) + " Link, che sono " );
 				for(int k=puntatorePartenza; k<posizioneIniziale;k++) {
-					int collegamento = Collegamenti.get(k);
-					System.out.println(collegamento);
+					LinkSP.add(Collegamenti.get(k));
+					System.out.println(Collegamenti.get(k));
 				}
 			}
-		}
 
+			System.out.println("Prova1");
+			for(int puntatore: grafoSP)
+				System.out.println(puntatore);
+			System.out.println("Prova2");
+			for(int puntatore: LinkSP)
+				System.out.println(puntatore);
+			System.out.println("Prova3");
+			for(int puntatore: quantitaSP)
+				System.out.println(puntatore);
+		}
 	}
 
 	public static void Fine() {
 		Quantita.add(contaLink);
 	}
 
+
+	
 }
