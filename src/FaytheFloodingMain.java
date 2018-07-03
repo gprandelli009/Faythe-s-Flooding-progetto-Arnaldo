@@ -6,7 +6,7 @@ public class FaytheFloodingMain {
 		
 		Read read_xml=new Read();
 		read_xml.explore("input_8.1.F.xml");
-		Calcolo.prova();
+		//Calcolo.prova();
 		Calcolo.Iterazioni();
 		
 	}

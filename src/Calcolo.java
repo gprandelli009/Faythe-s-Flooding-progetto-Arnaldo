@@ -86,35 +86,60 @@ public class Calcolo {
 			LinkSP.clear();
 			quantitaSP.clear();
 			dimensioneGrafo=dimensioneGrafo + DimensioniGrafi.get(i);
-			System.out.println("il problema numero " + i + " ha i seguenti nodi:");
+			//System.out.println("il problema numero " + i + " ha i seguenti nodi:");
 			for(int j=posizionePartenza;j<dimensioneGrafo;j++) {
 				int puntatorePartenza = posizioneIniziale;
 				posizioneIniziale= posizioneIniziale + Quantita.get(j);
 				grafoSP.add(Nodi.get(j));
 				quantitaSP.add(Quantita.get(j));
-				System.out.println(Nodi.get(j) + " che ha " +Quantita.get(j) + " Link, che sono " );
+				//System.out.println(Nodi.get(j) + " che ha " +Quantita.get(j) + " Link, che sono " );
 				for(int k=puntatorePartenza; k<posizioneIniziale;k++) {
 					LinkSP.add(Collegamenti.get(k));
-					System.out.println(Collegamenti.get(k));
+					//System.out.println(Collegamenti.get(k));
 				}
 			}
 
-			System.out.println("Prova1");
-			for(int puntatore: grafoSP)
-				System.out.println(puntatore);
-			System.out.println("Prova2");
-			for(int puntatore: LinkSP)
-				System.out.println(puntatore);
-			System.out.println("Prova3");
-			for(int puntatore: quantitaSP)
-				System.out.println(puntatore);
+			Flooding(grafoSP,quantitaSP,LinkSP);
+//			System.out.println("Prova1");
+//			for(int puntatore: grafoSP)
+//				System.out.println(puntatore);
+//			System.out.println("Prova2");
+//			for(int puntatore: LinkSP)
+//				System.out.println(puntatore);
+//			System.out.println("Prova3");
+//			for(int puntatore: quantitaSP)
+//				System.out.println(puntatore);
 		}
 	}
 
-	public static void Fine() {
+	public static void risolviProblemaUltimoLink() {
 		Quantita.add(contaLink);
 	}
 
+	public static void Flooding(ArrayList<Integer> nodi,ArrayList<Integer> quantitaLink,ArrayList<Integer> link) {
+		int contaDa=0;
+		int contaA=0;
+		ArrayList<ArrayList<Integer>> indirizzi = new ArrayList<ArrayList<Integer>>();
+		for(int i=0;i<nodi.size();i++) {
+			ArrayList<Integer> copia = new ArrayList<Integer>(nodi);
+			copia.remove(i);
+			ArrayList<Integer> linkDelNodo = new ArrayList<Integer>();
+			contaA=contaDa + quantitaLink.get(i);
+			System.out.println("contaDa "+contaDa+" contaA "+contaA);
+			System.out.println("LIIIIINK");
+			for(int j=contaDa;j<contaA;j++) {
+				linkDelNodo.add(link.get(j));
+			}
+			indirizzi.add(linkDelNodo);
+//			System.out.println("Tadah "+indirizzi);
+			for(int puntatore: linkDelNodo) {
+				System.out.println(puntatore);
+			}
+			contaDa = contaDa +quantitaLink.get(i);
+		}
 
-	
+		System.out.println("Tadah "+indirizzi);
+	}
+
+
 }

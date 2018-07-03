@@ -56,7 +56,7 @@ public class Read {
 			System.err.println(e.getMessage());
 		}
 
-		Calcolo.Fine();
+		Calcolo.risolviProblemaUltimoLink();
 		
 	}
 	
