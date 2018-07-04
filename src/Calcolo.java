@@ -100,15 +100,15 @@ public class Calcolo {
 			}
 
 			Flooding(grafoSP,quantitaSP,LinkSP);
-//			System.out.println("Prova1");
-//			for(int puntatore: grafoSP)
-//				System.out.println(puntatore);
-//			System.out.println("Prova2");
-//			for(int puntatore: LinkSP)
-//				System.out.println(puntatore);
-//			System.out.println("Prova3");
-//			for(int puntatore: quantitaSP)
-//				System.out.println(puntatore);
+			//			System.out.println("Prova1");
+			//			for(int puntatore: grafoSP)
+			//				System.out.println(puntatore);
+			//			System.out.println("Prova2");
+			//			for(int puntatore: LinkSP)
+			//				System.out.println(puntatore);
+			//			System.out.println("Prova3");
+			//			for(int puntatore: quantitaSP)
+			//				System.out.println(puntatore);
 		}
 	}
 
@@ -121,24 +121,65 @@ public class Calcolo {
 		int contaA=0;
 		ArrayList<ArrayList<Integer>> indirizzi = new ArrayList<ArrayList<Integer>>();
 		for(int i=0;i<nodi.size();i++) {
-			ArrayList<Integer> copia = new ArrayList<Integer>(nodi);
-			copia.remove(i);
 			ArrayList<Integer> linkDelNodo = new ArrayList<Integer>();
 			contaA=contaDa + quantitaLink.get(i);
 			System.out.println("contaDa "+contaDa+" contaA "+contaA);
-			System.out.println("LIIIIINK");
+			System.out.println("link ");
 			for(int j=contaDa;j<contaA;j++) {
 				linkDelNodo.add(link.get(j));
 			}
 			indirizzi.add(linkDelNodo);
-//			System.out.println("Tadah "+indirizzi);
 			for(int puntatore: linkDelNodo) {
 				System.out.println(puntatore);
 			}
 			contaDa = contaDa +quantitaLink.get(i);
 		}
+		for(int i=0;i<nodi.size();i++) {
+			ArrayList<Integer> copia = new ArrayList<Integer>(nodi);
+			copia.remove(i);
+			//			System.out.println("VVV"+copia + nodi);
+			ArrayList<Integer> linkDaPassare = new ArrayList<Integer>(indirizzi.get(i));
+			//			System.out.println("FFF" + linkDaPassare);
+			ArrayList<Integer> linkAggiornati = new ArrayList<Integer>();
+			do {
+				linkAggiornati.clear();
+				for(int puntatore1 : linkDaPassare) {
+					for(int k=0;k<copia.size();k++) {
+						if(puntatore1==copia.get(k)) {
+							copia.remove(k);
+							System.out.println("GG"+copia);
+						}
+					}
+				}
+				for(int puntatore1 : linkDaPassare) {
+					//					for(int k=0;k<copia.size();k++) {
+					//						if(puntatore1==copia.get(k)) {
+					//							copia.remove(k);
+					//							System.out.println("GG"+copia + nodi);
+					//						}
+					//					}
+					for(int puntatore2:indirizzi.get(puntatore1)) {
+						for(int j=0;j<copia.size();j++) {
+							if(puntatore2==copia.get(j)) {
+								linkAggiornati.add(puntatore2);
+								copia.remove(j);
+								System.out.println("GG"+copia + copia.isEmpty());
+							}
+						}
+					}
+				}
+				linkDaPassare.clear();
+				for(int puntatore3 : linkAggiornati) 
+				{
+					linkDaPassare.add(puntatore3);
+				}
+			}
+			while(!copia.isEmpty());
+		}
+
 
 		System.out.println("Tadah "+indirizzi);
+
 	}
 
 
